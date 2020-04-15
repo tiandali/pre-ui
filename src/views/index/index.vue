@@ -2,19 +2,33 @@
   <div class="wel-contailer">
     <div class="banner-text">
       <div style="text-align: center;">
-        <img src="https://gitee.com/li_haodong/picture_management/raw/master/pic/WechatIMG9.png" height="256" width="256" alt="pre系统logo">
+        <img
+          src="https://gitee.com/li_haodong/picture_management/raw/master/pic/WechatIMG9.png"
+          height="256"
+          width="256"
+          alt="pre系统logo"
+        >
       </div>
-      <span>
+      <div
+        :id="id"
+        :class="className"
+        :style="{height:height,width:width}"
+      />
+      <!-- <span>
         <a href="https://gitee.com/li_haodong/pre" target="_blank">
-          <img src="https://img.shields.io/badge/Pre-1.1-green.svg" alt="Build Status">
+          <img src="https://img.shields.io/badge/Pre-1.1-green.svg" alt="Build Status" />
         </a>
-        <img src="https://img.shields.io/badge/spring--boot-2.1.6.RELEASE-green.svg" alt="spring-boot">
-        <img src="https://img.shields.io/badge/security-5.1.5-blue.svg" alt="security">
-        <img src="https://img.shields.io/badge/mybatis--plus-3.1.2-blue.svg" alt="mybatis-plus">
+        <img
+          src="https://img.shields.io/badge/spring--boot-2.1.6.RELEASE-green.svg"
+          alt="spring-boot"
+        />
+        <img src="https://img.shields.io/badge/security-5.1.5-blue.svg" alt="security" />
+        <img src="https://img.shields.io/badge/mybatis--plus-3.1.2-blue.svg" alt="mybatis-plus" />
       </span>
-      <br>
+      <br />
+      -->
       <span>
-        <el-collapse v-model="activeNames">
+        <!-- <el-collapse v-model="activeNames">
           <el-collapse-item title="Pre RBAC权限管理系统" name="1">
             <div>基于Spring Boot 2.1.6.RELEASE</div>
             <div>基于Spring Security 5.1.5</div>
@@ -39,79 +53,300 @@
             <div>岗位管理 、字典管理 、操作日志 、异常日志 、代码生成</div>
             <div><a href="https://gitee.com/li_haodong/pre" target="_blank">详细介绍Pre </a></div>
           </el-collapse-item>
-        </el-collapse>
+        </el-collapse>-->
       </span>
     </div>
   </div>
 </template>
 
 <script>
+import echarts from "echarts";
+
 export default {
-  name: 'Index',
+  name: "Index",
+  props: {
+    className: {
+      type: String,
+      default: "chart"
+    },
+    id: {
+      type: String,
+      default: "chart"
+    },
+    width: {
+      type: String,
+      default: "100%"
+    },
+    height: {
+      type: String,
+      default: "500px"
+    }
+  },
   data() {
     return {
-      activeNames: ['1', '2', '3', '4'],
+      activeNames: ["1", "2", "3", "4"],
       DATA: [],
-      text: '',
-      actor: '',
+      text: "",
+      actor: "",
       count: 0,
       isText: false
+    };
+  },
+  mounted() {
+    this.initChart();
+  },
+  beforeDestroy() {
+    if (!this.chart) {
+      return;
     }
+    this.chart.dispose();
+    this.chart = null;
   },
 
   methods: {
+    initChart() {
+      this.chart = echarts.init(document.getElementById(this.id));
+
+      const xAxisData = [];
+      const data = [];
+      const data2 = [];
+      for (let i = 0; i < 50; i++) {
+        xAxisData.push(i);
+        data.push((Math.sin(i / 5) * (i / 5 - 10) + i / 6) * 5);
+        data2.push((Math.sin(i / 5) * (i / 5 + 10) + i / 6) * 3);
+      }
+      let graph2 = {
+        nodes: [
+          {
+            id: "0",
+            label: { normal: { show: true } },
+            name: "dali",
+            value: 1000,
+            symbolSize: 10,
+            category: 0,
+            draggable: true,
+            itemStyle: null,
+            x: null,
+            y: null,
+            attributes: { modularity_class: 0 }
+          },
+          {
+            id: "1",
+            label: { normal: { show: true } },
+            name: "jianling",
+            value: 200,
+            symbolSize: 30,
+            category: 0,
+            draggable: true,
+            itemStyle: null,
+            x: null,
+            y: null,
+            attributes: { modularity_class: 0 }
+          },
+          {
+            id: "2",
+            label: { normal: { show: true } },
+            name: "weiya",
+            value: 700,
+            symbolSize: 30,
+            category: 0,
+            draggable: true,
+            itemStyle: null,
+            x: null,
+            y: null,
+            attributes: { modularity_class: 0 }
+          },
+          {
+            id: "3",
+            label: { normal: { show: true } },
+            name: "yusen",
+            value: 700,
+            symbolSize: 30,
+            category: 0,
+            draggable: true,
+            itemStyle: null,
+            x: null,
+            y: null,
+            attributes: { modularity_class: 0 }
+          }
+        ],
+        links: [
+          {
+            id: "0",
+            source: "1",
+            target: "0",
+            name: null,
+            lineStyle: { normal: {} }
+          },
+          {
+            id: "1",
+            source: "2",
+            target: "0",
+            name: null,
+            lineStyle: { normal: {} }
+          },
+          {
+            id: "2",
+            source: "2",
+            target: "1",
+            name: null,
+            lineStyle: { normal: {} }
+          },
+          {
+            id: "3",
+            source: "3",
+            target: "0",
+            name: null,
+            lineStyle: { normal: {} }
+          },
+          {
+            id: "4",
+            source: "3",
+            target: "1",
+            name: null,
+            lineStyle: { normal: {} }
+          },
+          {
+            id: "5",
+            source: "3",
+            target: "2",
+            name: null,
+            lineStyle: { normal: {} }
+          }
+        ]
+      };
+      var categories = [];
+      for (var i = 0; i < 1; i++) {
+        categories[i] = {
+          name: "类目" + i
+        };
+      }
+
+      this.chart.setOption({
+        backgroundColor: "#08263a",
+        color: ["#199475", "#61a0a8", "#d48265", "#91c7ae", "#749f83"],
+        grid: {
+          left: "5%",
+          right: "5%"
+        },
+        xAxis: [
+          {
+            show: false,
+            data: xAxisData
+          },
+          {
+            show: false,
+            data: xAxisData
+          }
+        ],
+
+        yAxis: {
+          axisLine: {
+            show: false
+          },
+          axisLabel: {
+            textStyle: {
+              color: "#4a657a"
+            }
+          },
+          splitLine: {
+            show: true,
+            lineStyle: {
+              color: "#08263f"
+            }
+          },
+          axisTick: {
+            show: false
+          }
+        },
+        legend: [
+          {
+            // selectedMode: 'single',
+            data: categories.map(function(a) {
+              return a.name;
+            })
+          }
+        ],
+        animation: false,
+        series: [
+          {
+            name: "ssss",
+            type: "graph",
+            layout: "force",
+            data: graph2.nodes,
+            links: graph2.links,
+            categories: categories,
+            roam: true,
+            label: {
+              position: "right"
+            },
+            force: {
+              repulsion: 10000
+            }
+          }
+        ],
+        animationEasing: "elasticOut",
+        animationEasingUpdate: "elasticOut",
+        animationDelay(idx) {
+          return idx * 20;
+        },
+        animationDelayUpdate(idx) {
+          return idx * 20;
+        }
+      });
+    }
   }
-}
+};
 </script>
 
 <style scoped="scoped" lang="scss">
-  .wel-contailer {
-    position: relative;
-  }
+.wel-contailer {
+  position: relative;
+}
 
-  .banner-text {
-    position: relative;
-    padding: 0 20px;
-    font-size: 20px;
-    text-align: center;
-    color: #333;
-  }
+.banner-text {
+  position: relative;
+  padding: 0 20px;
+  font-size: 20px;
+  text-align: center;
+  color: #333;
+}
 
-  .banner-img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    opacity: 0.8;
-    display: none;
-  }
+.banner-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.8;
+  display: none;
+}
 
-  .actor {
-    height: 250px;
-    overflow: hidden;
-    font-size: 18px;
-    color: #333;
-  }
+.actor {
+  height: 250px;
+  overflow: hidden;
+  font-size: 18px;
+  color: #333;
+}
 
-  .actor:after {
-    content: '';
-    width: 3px;
-    height: 25px;
-    vertical-align: -5px;
-    margin-left: 5px;
-    background-color: #333;
-    display: inline-block;
-    animation: blink 0.4s infinite alternate;
-  }
+.actor:after {
+  content: "";
+  width: 3px;
+  height: 25px;
+  vertical-align: -5px;
+  margin-left: 5px;
+  background-color: #333;
+  display: inline-block;
+  animation: blink 0.4s infinite alternate;
+}
 
-  .typeing:after {
-    animation: none;
-  }
+.typeing:after {
+  animation: none;
+}
 
-  @keyframes blink {
-    to {
-      opacity: 0;
-    }
+@keyframes blink {
+  to {
+    opacity: 0;
   }
+}
 </style>

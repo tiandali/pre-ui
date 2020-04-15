@@ -10,8 +10,10 @@ NProgress.configure({ showSpinner: false })
 const whiteList = ['/login', '/auth-redirect', '/bind', '/register', '/login1']
 
 router.beforeEach((to, from, next) => {
+  console.log('to: ', to);
   NProgress.start()
   if (getToken()) {
+    console.log('has token');
     /* has token*/
     if (to.path === '/login') {
       next({ path: '/' })
@@ -22,6 +24,7 @@ router.beforeEach((to, from, next) => {
         store.dispatch('GetUserInfo').then(res => {
           // 拉取user_info
           const roles = res.data.roles
+          console.log('roles: ', roles);
           store.dispatch('GenerateRoutes').then(accessRoutes => {
             // 根据roles权限生成可访问的路由表
             router.addRoutes(accessRoutes) // 动态添加可访问路由表
@@ -47,6 +50,7 @@ router.beforeEach((to, from, next) => {
     }
   } else {
     // 没有token
+    console.log('no token');
     if (whiteList.indexOf(to.path) !== -1) {
       // 在免登录白名单，直接进入
       next()

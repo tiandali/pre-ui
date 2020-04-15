@@ -1,4 +1,5 @@
 import request from '@/utils/request'
+import axios from 'axios'
 
 export function loginByUsername(username, password, code, token, key) {
   const data = {
@@ -9,11 +10,21 @@ export function loginByUsername(username, password, code, token, key) {
     key
   }
   // 登录
-  return request({
-    url: '/login',
-    method: 'post',
-    params: data
+  // return request({
+  //   url: '/mock/api/v3/login',
+  //   // url: '/login',
+  //   method: 'post',
+  //   params: data
+  // })
+  return axios.post('/mock/api/v3/login', {
+    ...data
   })
+  // .then(function (response) {
+  //   console.log('11111', response);
+  // })
+  // .catch(function (error) {
+  //   console.log(error);
+  // });
 }
 
 // 登出
@@ -25,10 +36,11 @@ export function logout() {
 }
 
 export function getUserInfo() {
-  return request({
-    url: '/info',
-    method: 'get'
-  })
+  // return request({
+  //   url: '/info',
+  //   method: 'get'
+  // })
+  return axios.get('/mock/api/v3/userInfo')
 }
 
 export function getImgCode() {

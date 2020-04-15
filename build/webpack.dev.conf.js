@@ -8,6 +8,7 @@ const baseWebpackConfig = require('./webpack.base.conf')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 const portfinder = require('portfinder')
+const { mockConfig } = require('./mock.config.js');
 
 function resolve(dir) {
   return path.join(__dirname, '..', dir)
@@ -44,7 +45,14 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     quiet: true, // necessary for FriendlyErrorsPlugin
     watchOptions: {
       poll: config.dev.poll
-    }
+    },
+    before(server) {
+      mockConfig.forEach(e => {
+        server[e.method](`${e.api}`, (req, res) => {
+          setTimeout(() => res.json(e.response), e.delay || 2000);
+        });
+      });
+    },
   },
   plugins: [
     new webpack.DefinePlugin({
@@ -82,7 +90,7 @@ module.exports = new Promise((resolve, reject) => {
           compilationSuccessInfo: {
             messages: [
               `Your application is running here: http://${
-                devWebpackConfig.devServer.host
+              devWebpackConfig.devServer.host
               }:${port}`
             ]
           },

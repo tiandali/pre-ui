@@ -1,4 +1,5 @@
 import request from '@/utils/request'
+import axios from 'axios'
 
 /*
  * 菜单管理模块
@@ -29,10 +30,11 @@ export const getMenuTree = () => {
 
 // 获取路由
 export const getRouters = () => {
-  return request({
-    url: '/menu/getRouters',
-    method: 'get'
-  })
+  // return request({
+  //   url: '/menu/getRouters',
+  //   method: 'get'
+  // })
+  return axios.get('/mock/api/v3/route')
 }
 // 获取菜单列表
 export const getMenus = () => {

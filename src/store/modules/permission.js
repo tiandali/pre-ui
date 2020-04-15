@@ -19,6 +19,7 @@ const permission = {
       return new Promise(resolve => {
         // 向后端请求路由数据
         getRouters().then(res => {
+          console.log('res: ', res);
           const accessedRoutes = filterAsyncRouter(res.data.data)
           commit('SET_ROUTES', accessedRoutes)
           resolve(accessedRoutes)
@@ -31,7 +32,8 @@ const permission = {
 // 遍历后台传来的路由字符串，转换为组件对象
 function filterAsyncRouter(asyncRouterMap) {
   return asyncRouterMap.filter(route => {
-    console.log(route.component)
+    console.log('route: ', route);
+    console.log('route.component', route.component)
     if (route.component) {
       // Layout组件特殊处理
       if (route.component === 'Layout') {

@@ -49,6 +49,7 @@ const user = {
         loginByUsername(username, userInfo.password, userInfo.code, userInfo.token, userInfo.key).then(response => {
           console.log(response)
           const data = response.data
+          console.log('data: ', data);
           commit('SET_TOKEN', data.data)
           setToken(data.data)
           resolve()
