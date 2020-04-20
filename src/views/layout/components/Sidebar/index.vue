@@ -10,36 +10,38 @@
         :active-text-color="variables.menuActiveText"
         :collapse-transition="false"
         :unique-opened="true"
-        mode="vertical"
+        mode="horizontal"
       >
-        <sidebar-item v-for="route in permission_routes" :key="route.path" :item="route" :base-path="route.path" />
+        <sidebar-item
+          v-for="route in permission_routes"
+          :key="route.path"
+          :item="route"
+          :base-path="route.path"
+        />
       </el-menu>
     </el-scrollbar>
   </div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
-import SidebarItem from './SidebarItem'
-import variables from '@/styles/variables.scss'
-import Logo from './Logo'
+import { mapGetters } from "vuex";
+import SidebarItem from "./SidebarItem";
+import variables from "@/styles/variables.scss";
+import Logo from "./Logo";
 
 export default {
   components: { SidebarItem, Logo },
   computed: {
-    ...mapGetters([
-      'permission_routes',
-      'sidebar'
-    ]),
+    ...mapGetters(["permission_routes", "sidebar"]),
     variables() {
-      return variables
+      return variables;
     },
     isCollapse() {
-      return !this.sidebar.opened
+      return !this.sidebar.opened;
     },
     showLogo() {
-      return this.$store.state.setting.sidebarLogo
+      return this.$store.state.setting.sidebarLogo;
     }
   }
-}
+};
 </script>

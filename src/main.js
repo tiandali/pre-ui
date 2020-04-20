@@ -17,6 +17,7 @@ import router from './router'
 import './icons' // icon
 import './errorLog' // error log
 import './permission' // permission control
+import '@/assets/iconfont/iconfont.css'
 
 import * as filters from './filters' // global filters
 

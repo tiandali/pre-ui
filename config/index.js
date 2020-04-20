@@ -8,7 +8,7 @@ module.exports = {
     assetsPublicPath: '/',
     proxyTable: {
       '/pre': {
-        target: 'http://localhost:8081',//后端接口地址
+        target: 'http://192.168.0.146:8000',//后端接口地址
         // target: 'https://pre.52lhd.com',//后端接口地址
         changeOrigin: true,  //是否跨域
         pathRewrite: {

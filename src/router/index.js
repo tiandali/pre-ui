@@ -57,6 +57,18 @@ export const constantRoutes = [
     ]
   },
   {
+    path: '/admin2',
+    component: Layout,
+    children: [
+      {
+        path: '',
+        component: () => import('@/views/index/index'),
+        name: 'Dashboard',
+        meta: { title: '实体查询', icon: 'iconfont iconziyuan1', noCache: true, affix: true }
+      }
+    ]
+  },
+  {
     path: '/user',
     component: Layout,
     hidden: true,

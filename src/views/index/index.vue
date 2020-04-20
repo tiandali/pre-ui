@@ -7,13 +7,10 @@
           height="256"
           width="256"
           alt="pre系统logo"
-        >
+        />
+        <el-button type="primary" @click="sendData">主要按钮</el-button>
       </div>
-      <div
-        :id="id"
-        :class="className"
-        :style="{height:height,width:width}"
-      />
+      <div :id="id" :class="className" :style="{height:height,width:width}" />
       <!-- <span>
         <a href="https://gitee.com/li_haodong/pre" target="_blank">
           <img src="https://img.shields.io/badge/Pre-1.1-green.svg" alt="Build Status" />
@@ -61,6 +58,8 @@
 
 <script>
 import echarts from "echarts";
+import axios from "axios";
+import request from "@/utils/request";
 
 export default {
   name: "Index",
@@ -293,6 +292,13 @@ export default {
         animationDelayUpdate(idx) {
           return idx * 20;
         }
+      });
+    },
+    sendData() {
+      request({
+        url: "/testpatato",
+        method: "get",
+        params: { user_text: "土豆" }
       });
     }
   }
